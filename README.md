@@ -34,7 +34,7 @@ Every name (module,service, etc) looks looks like this:
 Small default rouing provided in /httpdocs/dist/js/app/providers/routeProvider.js  
 Angular material is excluded from app by default, but it is included in package.json
 
-## SVG Sprite ## 
+## SVG Sprite ##
 SVG files are included in index.js
 Source folder is /httpdocs/dist/img/sprite
 For correct using you'll have to use combined shapes and remove all fills or strockes from source files. And replace them by css filling. If source colouring suits you well, you can leave it.
