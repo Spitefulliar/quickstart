@@ -3,7 +3,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(28);
+	module.exports = __webpack_require__(33);
 
 
 /***/ },
@@ -42547,7 +42547,8 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./default/module.js": 23
+		"./default/module.js": 23,
+		"./main/module.js": 28
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -42565,38 +42566,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 23 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _controller = __webpack_require__(24);
-
-	var _controller2 = _interopRequireDefault(_controller);
-
-	var _directive = __webpack_require__(26);
-
-	var _directive2 = _interopRequireDefault(_directive);
-
-	var _service = __webpack_require__(27);
-
-	var _service2 = _interopRequireDefault(_service);
-
-	var _config = __webpack_require__(25);
-
-	var _config2 = _interopRequireDefault(_config);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var MODULE_NAME = _config2.default.name;
-
-	exports.default = angular.module(CONFIG.APP.PREFIX + MODULE_NAME, []).controller(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX, _controller2.default).directive(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.DIRECTIVE_POSTFIX, _directive2.default).service(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, _service2.default);
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
-
-/***/ },
+[47, 24, 26, 27, 25],
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -42679,13 +42649,174 @@ webpackJsonp([0],[
 
 /***/ },
 /* 28 */
+[47, 29, 31, 32, 30],
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _config = __webpack_require__(30);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MODULE_NAME = _config2.default.name; //CONTROLLER
+	exports.default = ['$scope', '$rootScope', CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, '$location', '$log', '$timeout', '$window', '$state', '$sce', '$http',
+	// '$mdSidenav','$mdMedia', 
+	function ($scope, $rootScope, $moduleService, $location, $log, $timeout, $window, $state, $sce, $http) {
+	  // $mdSidenav, $mdMedia, 
+
+	  $scope[CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX] = $moduleService;
+
+	  //media
+	  // $scope.$watch(function() { return $mdMedia('gt-sm'); }, function(mquery) {
+	  //   $scope.isDesktop = mquery;
+	  // });
+	  // $scope.$watch(function() { return $mdMedia('sm'); }, function(mquery) {
+	  //   $scope.isTablet = mquery;
+	  // });
+	  // $scope.$watch(function() { return $mdMedia('xs'); }, function(mquery) {
+	  //   $scope.isMobile = mquery;
+	  // });
+
+
+	  // //sidenav
+	  // $scope.sidenavToggle = function(){
+	  //   $mdSidenav('sidenav-right').toggle();
+	  //   // $scope.sidenavIsOpen = !$scope.sidenavIsOpen;
+	  // }
+
+	  // $scope.sidenavHide = function() {
+	  //   $mdSidenav('sidenav-right').close();
+	  //   // $scope.sidenavIsOpen = false;
+	  // }
+
+	  // $scope.sidenavHideMedia = function() {
+	  //   if ($mdMedia('gt-sm')) {
+	  //     $scope.sidenavHide();
+	  //   }
+	  //   return $mdMedia('gt-sm');
+	  // }
+
+	  // $scope.$watch($scope.sidenavHideMedia);
+
+	  //eof sidenav
+
+	  //for html binding
+	  $scope.trustAsHtml = function (value) {
+	    return $sce.trustAsHtml(value);
+	  };
+
+	  $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+	    $scope.pageData = $state.current.data;
+	  });
+	}];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  name: 'Main'
+	};
+
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _config = __webpack_require__(30);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MODULE_NAME = _config2.default.name; //DIRECTIVE
+	exports.default = ['$rootScope', '$http', '$timeout', '$window', '$state',
+	// '$mdMedia', 
+	function ($rootScope, $http, $timeout, $window, $state) {
+	  // $mdMedia, 
+	  var linkFunction = function linkFunction($scope, $element, $attributes) {};
+	  return {
+	    restrict: "A",
+	    link: linkFunction,
+	    controller: CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX
+	  };
+	}];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 32 */
+27,
+/* 33 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(29);
+	__webpack_require__(34);
 
 /***/ },
-/* 29 */
-35
+/* 34 */
+40,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */
+/***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__, __webpack_module_template_argument_3__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _controller = __webpack_require__(__webpack_module_template_argument_0__);
+
+	var _controller2 = _interopRequireDefault(_controller);
+
+	var _directive = __webpack_require__(__webpack_module_template_argument_1__);
+
+	var _directive2 = _interopRequireDefault(_directive);
+
+	var _service = __webpack_require__(__webpack_module_template_argument_2__);
+
+	var _service2 = _interopRequireDefault(_service);
+
+	var _config = __webpack_require__(__webpack_module_template_argument_3__);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MODULE_NAME = _config2.default.name;
+
+	exports.default = angular.module(CONFIG.APP.PREFIX + MODULE_NAME, []).controller(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX, _controller2.default).directive(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.DIRECTIVE_POSTFIX, _directive2.default).service(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, _service2.default);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ }
 ]);

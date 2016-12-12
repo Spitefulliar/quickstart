@@ -43,7 +43,7 @@ function requireAll(requireContext) {
 }
 
 //custom modules
-let AppModules = require.context('./modules/', true, /^\.\/.*(module)\.js$/);
+let AppModules = require.context('./components/', true, /^\.\/.*(module)\.js$/);
 // AppModules.keys().forEach(AppModules);
 requireAll(AppModules);
 
