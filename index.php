@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" ng-app="app" art-core-dir>
+<html lang="ru" ng-app="app" art-main-dir>
 <head>
   <title ng-bind="pageData.title"></title>
 
@@ -15,8 +15,8 @@
   <!-- eof CSS -->
   
   <!-- js -->
-  <script src="./dist/assets/vendor.js?<?php echo time()?>" type="text/javascript" charset="utf-8" async defer></script>
-  <script src="./dist/assets/bundle.js?<?php echo time()?>" type="text/javascript" charset="utf-8" async defer></script>
+  <script src="./dist/assets/vendor.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
+  <script src="./dist/assets/bundle.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
   <!-- eof js -->
 </head>
 

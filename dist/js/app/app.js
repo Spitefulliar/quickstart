@@ -30,14 +30,6 @@ import angularSlick from 'angular-slick-carousel';
 
 // require('angular-i18n/angular-locale_'+ 'ru-ru' +'.js');
 
-//hack for slickCarousel's work
-angular.element.prototype.not = function( selector ) {
-  return $(this).not(selector);
-};
-angular.element.prototype.slick = function( option ) {
-  return $(this).slick(option);
-};
-
 function requireAll(requireContext) {
   return requireContext.keys().map(requireContext);
 }
@@ -47,6 +39,11 @@ let AppModules = require.context('./components/', true, /^\.\/.*(module)\.js$/);
 // AppModules.keys().forEach(AppModules);
 requireAll(AppModules);
 
+//pages
+let Pages = require.context('./pages/', true, /^\.\/.*(module)\.js$/);
+// Pages.keys().forEach(Pages);
+requireAll(Pages);
+
 let AppModulesArr = [];
 AppModules.keys().forEach(function(item, i, arr) {
   let tmpName = item.substr(2).slice(0,-10);
@@ -54,6 +51,11 @@ AppModules.keys().forEach(function(item, i, arr) {
   AppModulesArr.push(name);
 });
 
+Pages.keys().forEach(function(item, i, arr) {
+  let tmpName = item.substr(2).slice(0,-10);
+  let name = CONFIG.APP.PREFIX + tmpName[0].toUpperCase() + tmpName.slice(1) + CONFIG.APP.PAGE_POSTFIX;
+  AppModulesArr.push(name);
+});
 
 //all dependent modules
 let appModulesArr = AppModulesArr.concat([
@@ -85,6 +87,7 @@ let appModulesArr = AppModulesArr.concat([
     // 'video-background',
 ]);
 // console.log(appModulesArr);
+
 
 
 //app

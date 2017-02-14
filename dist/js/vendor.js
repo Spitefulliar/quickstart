@@ -7,5 +7,5 @@ import slick from 'slick-carousel';
 // vendor-styles
 require('normalize.css/normalize.css');
 require('angular/angular-csp.css');
-require('angular-material/angular-material.css');
+// require('angular-material/angular-material.css');
 

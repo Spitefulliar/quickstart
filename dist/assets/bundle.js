@@ -3,7 +3,7 @@ webpackJsonp([0],[
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	module.exports = __webpack_require__(33);
+	module.exports = __webpack_require__(51);
 
 
 /***/ },
@@ -55,7 +55,7 @@ webpackJsonp([0],[
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function($, CONFIG) {'use strict';
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -124,14 +124,6 @@ webpackJsonp([0],[
 
 	// require('angular-i18n/angular-locale_'+ 'ru-ru' +'.js');
 
-	//hack for slickCarousel's work
-	_angular2.default.element.prototype.not = function (selector) {
-	  return $(this).not(selector);
-	};
-	_angular2.default.element.prototype.slick = function (option) {
-	  return $(this).slick(option);
-	};
-
 	function requireAll(requireContext) {
 	  return requireContext.keys().map(requireContext);
 	}
@@ -141,10 +133,21 @@ webpackJsonp([0],[
 	// AppModules.keys().forEach(AppModules);
 	requireAll(AppModules);
 
+	//pages
+	var Pages = __webpack_require__(40);
+	// Pages.keys().forEach(Pages);
+	requireAll(Pages);
+
 	var AppModulesArr = [];
 	AppModules.keys().forEach(function (item, i, arr) {
 	  var tmpName = item.substr(2).slice(0, -10);
 	  var name = CONFIG.APP.PREFIX + tmpName[0].toUpperCase() + tmpName.slice(1);
+	  AppModulesArr.push(name);
+	});
+
+	Pages.keys().forEach(function (item, i, arr) {
+	  var tmpName = item.substr(2).slice(0, -10);
+	  var name = CONFIG.APP.PREFIX + tmpName[0].toUpperCase() + tmpName.slice(1) + CONFIG.APP.PAGE_POSTFIX;
 	  AppModulesArr.push(name);
 	});
 
@@ -199,7 +202,7 @@ webpackJsonp([0],[
 	}]);
 
 	exports.default = MODULE_NAME;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3), __webpack_require__(8)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 8 */
@@ -216,6 +219,10 @@ webpackJsonp([0],[
 	  DIRECTIVE_POSTFIX: 'Dir',
 	  CONTROLLER_POSTFIX: 'Ctrl',
 	  SERVICE_POSTFIX: 'Service',
+	  PAGE_POSTFIX: 'Page',
+	  VIEWS_DIR: '../',
+	  API_DIR: '/api/json/',
+	  API_POSTFIX: '.json',
 	  "environment": {
 	    "locale": "ru-ru"
 	  }
@@ -223,7 +230,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 
@@ -236,33 +243,38 @@ webpackJsonp([0],[
 	    $locationProvider.html5Mode(false); //.hashPrefix('!'); 
 	    // $locationProvider.html5Mode(true);//.hashPrefix('!'); 
 
-	    var config = __webpack_require__(8);
-	    var viewsDir = "/dist/views/pages/";
-	    var viewsExt = ".html";
+	    // let config = require('../../helper_config.js');
+	    // let viewsDir = "/dist/views/pages/";
+	    // let viewsExt = ".html";
 
-	    var pages = [{
-	        state: 'index',
-	        template: 'index',
-	        title: 'Index',
-	        url: '^/',
-	        options: false
-	    }, {
-	        state: '404',
-	        template: '404',
-	        title: '404',
-	        url: '^/404/',
-	        options: false
-	    }];
+	    // let pages = [
+	    //   {
+	    //     state: 'index',
+	    //     template: 'index',
+	    //     title: 'Index',
+	    //     url: '^/',
+	    //     options: false
+	    //   },
+	    //   {
+	    //     state: '404',
+	    //     template: '404',
+	    //     title: '404',
+	    //     url: '^/404/',
+	    //     options: false
+	    //   }
+	    // ];
 
-	    pages.map(function (page) {
-	        $stateProvider.state(page.state, {
-	            url: page.url,
-	            templateUrl: viewsDir + page.template + viewsExt,
-	            data: {
-	                title: page.title
-	            }
-	        });
-	    });
+
+	    // pages.map(function(page){
+	    //   $stateProvider
+	    //     .state(page.state, {
+	    //         url: page.url,
+	    //         templateUrl: viewsDir + page.template + viewsExt,
+	    //         data : {
+	    //           title: page.title
+	    //         }
+	    //     });
+	    // });
 
 	    $urlRouterProvider.otherwise('404/');
 	}];
@@ -42548,7 +42560,8 @@ webpackJsonp([0],[
 
 	var map = {
 		"./default/module.js": 23,
-		"./main/module.js": 28
+		"./main/module.js": 29,
+		"./pageloader/module.js": 34
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -42566,7 +42579,7 @@ webpackJsonp([0],[
 
 /***/ },
 /* 23 */
-[47, 24, 26, 27, 25],
+[62, 24, 26, 28, 25],
 /* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -42583,10 +42596,7 @@ webpackJsonp([0],[
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var MODULE_NAME = _config2.default.name; //CONTROLLER
-	exports.default = ['$scope', '$rootScope', CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, '$location', '$log', '$timeout', '$window', '$state', '$sce', '$http',
-	// '$mdSidenav','$mdMedia', 
-	function ($scope, $rootScope, $moduleService, $location, $log, $timeout, $window, $state, $sce, $http) {
-	  // $mdSidenav, $mdMedia, 
+	exports.default = ['$scope', '$rootScope', CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, '$log', '$timeout', '$window', '$state', '$http', function ($scope, $rootScope, $moduleService, $log, $timeout, $window, $state, $http) {
 
 	  $scope[CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX] = $moduleService;
 	}];
@@ -42627,13 +42637,20 @@ webpackJsonp([0],[
 	  return {
 	    restrict: "AE",
 	    link: linkFunction,
-	    controller: CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX
+	    controller: CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX,
+	    template: __webpack_require__(27)
 	  };
 	}];
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
 /* 27 */
+/***/ function(module, exports) {
+
+	module.exports = "<h2>Default directive</h2>";
+
+/***/ },
+/* 28 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -42648,9 +42665,9 @@ webpackJsonp([0],[
 	}];
 
 /***/ },
-/* 28 */
-[47, 29, 31, 32, 30],
 /* 29 */
+[62, 30, 32, 33, 31],
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
@@ -42659,7 +42676,7 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _config = __webpack_require__(30);
+	var _config = __webpack_require__(31);
 
 	var _config2 = _interopRequireDefault(_config);
 
@@ -42719,7 +42736,7 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -42732,7 +42749,7 @@ webpackJsonp([0],[
 	};
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
@@ -42741,7 +42758,7 @@ webpackJsonp([0],[
 	  value: true
 	});
 
-	var _config = __webpack_require__(30);
+	var _config = __webpack_require__(31);
 
 	var _config2 = _interopRequireDefault(_config);
 
@@ -42762,31 +42779,361 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ },
-/* 32 */
-27,
 /* 33 */
+28,
+/* 34 */
+[62, 35, 37, 39, 36],
+/* 35 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _config = __webpack_require__(36);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MODULE_NAME = _config2.default.name; //CONTROLLER
+	exports.default = ['$scope', '$rootScope', CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, '$location', '$log', '$timeout', '$window', '$state', '$sce', '$http', function ($scope, $rootScope, $moduleService, $location, $log, $timeout, $window, $state, $sce, $http) {
+
+	  $scope[CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX] = $moduleService;
+
+	  $scope.getPage = $moduleService.getPage;
+	}];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  name: 'Pageloader'
+	};
+
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _config = __webpack_require__(36);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MODULE_NAME = _config2.default.name; //DIRECTIVE
+	exports.default = ['$rootScope', '$http', '$timeout', '$window', '$state', '$log', '$stateParams', '$compile', function ($rootScope, $http, $timeout, $window, $state, $log, $stateParams, $compile) {
+	  var linkFunction = function linkFunction($scope, $element, $attributes) {
+	    // taking a page constructor tpl to build a page, if it's a directive element
+	    var linkFn = typeof $attributes.artPageloaderDir == 'string' ? false : $compile(__webpack_require__(38));
+	    if (linkFn) {
+	      linkFn($scope, function cloneAttachFn(clone, scope) {
+	        $element.replaceWith(clone);
+	      });
+	    }
+
+	    var urlPostfix = CONFIG.APP.API_POSTFIX && $rootScope.pageData.apiParam.indexOf(CONFIG.APP.API_POSTFIX) == -1 ? CONFIG.APP.API_POSTFIX : '';
+
+	    $scope.getPage(CONFIG.APP.API_DIR + $rootScope.pageData.apiParam + urlPostfix, $stateParams.pageCode).then(function (response) {
+	      $scope.page = response.page;
+	      $scope.pageData.title = $scope.page.title || $scope.pageData.title;
+	      $rootScope.$broadcast('pageDataLoaded');
+	      $attributes = $attributes;
+	    });
+	  };
+	  return {
+	    restrict: "AE",
+	    link: linkFunction,
+	    controller: CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX,
+	    // template: require('./template.html'),
+	    template: false,
+	    replace: false,
+	    scope: false
+	  };
+	}];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
+
+	module.exports = "<pre>{{page}}</pre>";
+
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//SERVICE
+	exports.default = ['$http', '$rootScope', function ($http, $rootScope) {
+	  var service = {};
+
+	  service.getPage = function (apiurl, code) {
+	    var qData = {
+	      code: code
+	    };
+	    return $http({
+	      method: 'GET',
+	      url: apiurl + '?' + $.param(qData)
+	    }).then(function (response) {
+	      //if there are typycal page sections, transform  them
+	      if (response.data.page && response.data.page.sections) {
+	        response.data.page.sections = service.sectionsCommonTranform(response.data.page.sections);
+	      }
+
+	      return response.data;
+	    }, function (response) {
+	      console.warn("can't get page data");
+	    });
+	  };
+
+	  var makeVerticalGradient = function makeVerticalGradient(top, col1, col2, single) {
+	    var gradientTpl = [];
+	    gradientTpl[0] = '-moz-linear-gradient(' + (top ? 'top' : 'bottom') + ', ' + col1 + ', ' + col2 + ')';
+	    gradientTpl[1] = '-webkit-linear-gradient(' + (top ? 'top' : 'bottom') + ', ' + col1 + ', ' + col2 + ')';
+	    gradientTpl[2] = 'linear-gradient(' + (top ? 'to bottom' : 'to top') + ', ' + col1 + ', ' + col2 + ')';
+	    //single for real background declaration
+	    if (single) {
+	      return gradientTpl[2];
+	    } else {
+	      return gradientTpl;
+	    };
+	  };
+
+	  service.defaultStyleTranform = function (rawStyle) {
+	    if (!rawStyle) return false;
+	    var styleObj = {
+	      'color': rawStyle.textColor,
+	      'background-color': rawStyle.bgColor,
+	      'background-image': rawStyle.bgImage ? 'url(' + ($rootScope.isDesktop && rawStyle.bgImage.desktop || rawStyle.bgImage.mobile) + ')' : false,
+	      'background': rawStyle.bgGradient ? makeVerticalGradient(rawStyle.bgGradient.top, rawStyle.bgGradient.col1, rawStyle.bgGradient.col2, true) : false
+	    };
+	    if (rawStyle.bgGradient) rawStyle.bgGradientRule = makeVerticalGradient(rawStyle.bgGradient.top, rawStyle.bgGradient.col1, rawStyle.bgGradient.col2);
+	    return [rawStyle, styleObj];
+	  };
+
+	  service.sectionsCommonTranform = function (sections) {
+	    var tmpSections = sections;
+	    var tmpStyle = void 0;
+	    for (var i = tmpSections.length - 1; i >= 0; i--) {
+	      var section = tmpSections[i];
+	      tmpStyle = service.defaultStyleTranform(section.style);
+	      section.style = tmpStyle[0];
+	      section.commonStyle = tmpStyle[1];
+	      for (var j = section.blocks.length - 1; j >= 0; j--) {
+	        var block = section.blocks[j];
+	        tmpStyle = service.defaultStyleTranform(block.style);
+	        block.style = tmpStyle[0];
+	        block.commonStyle = tmpStyle[1];
+	      }
+	    }
+	    return tmpSections;
+	  };
+
+	  return service;
+	}];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var map = {
+		"./default/module.js": 41,
+		"./index/module.js": 46
+	};
+	function webpackContext(req) {
+		return __webpack_require__(webpackContextResolve(req));
+	};
+	function webpackContextResolve(req) {
+		return map[req] || (function() { throw new Error("Cannot find module '" + req + "'.") }());
+	};
+	webpackContext.keys = function webpackContextKeys() {
+		return Object.keys(map);
+	};
+	webpackContext.resolve = webpackContextResolve;
+	module.exports = webpackContext;
+	webpackContext.id = 40;
+
+
+/***/ },
+/* 41 */
+[63, 42, 45, 43],
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _config = __webpack_require__(43);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var template = __webpack_require__(44);
+	// import controller from './controller';
+
+	var PAGE_NAME = _config2.default.name;
+	var PAGE_STATE = _config2.default.state || _config2.default.name.toLowerCase();
+	var PAGE_URL = _config2.default.url || '/' + PAGE_STATE + '/';
+	var PAGE_TITLE = _config2.default.title || false;
+	var PAGE_API_PARAM = _config2.default.apiParam || PAGE_STATE;
+
+	var routing = ['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+	  $stateProvider.state(PAGE_STATE, {
+	    url: PAGE_URL + ':pageCode',
+	    template: template,
+	    controller: CONFIG.APP.PREFIX + PAGE_NAME + CONFIG.APP.PAGE_POSTFIX + CONFIG.APP.CONTROLLER_POSTFIX,
+	    data: {
+	      pageBgType: _config2.default.pageBgType || false,
+	      apiParam: PAGE_API_PARAM
+	    }
+	  });
+	}];
+
+	exports.default = routing;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 43 */
+25,
+/* 44 */
+/***/ function(module, exports) {
+
+	module.exports = "<div art-pageloader-dir>\r\n    <h1 ng-bind-html=\"defaultProp | html\"></h1>\r\n    <art-default-dir></art-default-dir>\r\n</div>\r\n";
+
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = ['$scope', '$rootScope', '$location', '$log', '$timeout', '$window', '$state', '$http', function ($scope, $rootScope, $location, $log, $timeout, $window, $state, $http) {}];
+
+/***/ },
+/* 46 */
+[63, 47, 50, 48],
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _config = __webpack_require__(48);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var template = __webpack_require__(49);
+
+	var PAGE_NAME = _config2.default.name;
+	var PAGE_STATE = _config2.default.state || _config2.default.name.toLowerCase();
+	var PAGE_URL = _config2.default.url || '/' + PAGE_STATE + '/';
+	var PAGE_TITLE = _config2.default.title || false;
+	var PAGE_API_PARAM = _config2.default.apiParam || PAGE_STATE;
+
+	var routing = ['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+	  $stateProvider.state(PAGE_STATE, {
+	    url: PAGE_URL + ':pageCode',
+	    template: template,
+	    controller: CONFIG.APP.PREFIX + PAGE_NAME + CONFIG.APP.PAGE_POSTFIX + CONFIG.APP.CONTROLLER_POSTFIX,
+	    data: {
+	      apiParam: PAGE_API_PARAM
+	    }
+	  });
+	}];
+
+	exports.default = routing;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.default = {
+	  name: 'Index',
+	  // title: 'Default page',
+	  state: 'index',
+	  url: '/'
+	};
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	module.exports = "<div art-pageloader-dir>\r\n    <h1 ng-bind-html=\"page.defaultProp | html\"></h1>\r\n    <p><a href=\"#/default/\">Default page link</a></p>\r\n    <art-default-dir></art-default-dir>\r\n</div>\r\n";
+
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//CONTROLLER
+	// import moduleConfig from './config';
+	// const MODULE_NAME = moduleConfig.name;
+
+	exports.default = ['$scope', '$rootScope', '$location', '$log', '$timeout', '$window', '$state', '$http', function ($scope, $rootScope, $location, $log, $timeout, $window, $state, $http) {}];
+
+/***/ },
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(34);
+	__webpack_require__(52);
 
 /***/ },
-/* 34 */
-40,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */,
-/* 41 */,
-/* 42 */,
-/* 43 */,
-/* 44 */,
-/* 45 */,
-/* 46 */,
-/* 47 */
+/* 52 */
+57,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */,
+/* 60 */,
+/* 61 */,
+/* 62 */
 /***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__, __webpack_module_template_argument_3__) {
 
 	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
@@ -42816,6 +43163,35 @@ webpackJsonp([0],[
 	var MODULE_NAME = _config2.default.name;
 
 	exports.default = angular.module(CONFIG.APP.PREFIX + MODULE_NAME, []).controller(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.CONTROLLER_POSTFIX, _controller2.default).directive(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.DIRECTIVE_POSTFIX, _directive2.default).service(CONFIG.APP.PREFIX + MODULE_NAME + CONFIG.APP.SERVICE_POSTFIX, _service2.default);
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__, __webpack_module_template_argument_0__, __webpack_module_template_argument_1__, __webpack_module_template_argument_2__) {
+
+	/* WEBPACK VAR INJECTION */(function(CONFIG) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _route = __webpack_require__(__webpack_module_template_argument_0__);
+
+	var _route2 = _interopRequireDefault(_route);
+
+	var _controller = __webpack_require__(__webpack_module_template_argument_1__);
+
+	var _controller2 = _interopRequireDefault(_controller);
+
+	var _config = __webpack_require__(__webpack_module_template_argument_2__);
+
+	var _config2 = _interopRequireDefault(_config);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PAGE_NAME = _config2.default.name;
+	// const Routing = require('./route');
+	exports.default = angular.module(CONFIG.APP.PREFIX + PAGE_NAME + CONFIG.APP.PAGE_POSTFIX, ['ui.router']).config(_route2.default).controller(CONFIG.APP.PREFIX + PAGE_NAME + CONFIG.APP.PAGE_POSTFIX + CONFIG.APP.CONTROLLER_POSTFIX, _controller2.default);
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }
