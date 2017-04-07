@@ -9,14 +9,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <base href="/">
 
-  <!-- CSS -->  
+  <!-- CSS -->
   <link rel="stylesheet" type="text/css" href="./dist/assets/vendor.css?<?php echo time()?>">
   <link rel="stylesheet" type="text/css" href="./dist/assets/bundle.css?<?php echo time()?>">
   <!-- eof CSS -->
-  
+
   <!-- js -->
-  <script src="./dist/assets/vendor.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
-  <script src="./dist/assets/bundle.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
+  <script rel="preload" src="./dist/assets/vendor.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
+  <script rel="preload" src="./dist/assets/bundle.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
   <!-- eof js -->
 </head>
 
