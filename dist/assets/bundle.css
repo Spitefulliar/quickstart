@@ -338,3 +338,11 @@ body {
     box-sizing: border-box; }
 
 /* eof main styles */
+/* ==========================================================================
+   mixins
+   ========================================================================== */
+/* eof mixins */
+.default {
+  background-color: #fff; }
+
+/*# sourceMappingURL=bundle.css.map*/
