@@ -1,111 +1,9 @@
 @import 'variables.scss';
+@import 'fonts.scss';
+@import 'mixins.scss';
+@import 'functions.scss';
+@import 'animations.scss';
 
-/* ==========================================================================
-   fonts
-   ========================================================================== */
-
-@font-face {
-    font-family: 'robotoblack';
-    src: url($fontspath + '/Roboto/roboto-black.eot');
-    src: url($fontspath + '/Roboto/roboto-black.eot?#iefix') format('embedded-opentype'),
-         url($fontspath + '/Roboto/roboto-black.woff2') format('woff2'),
-         url($fontspath + '/Roboto/roboto-black.woff') format('woff'),
-         url($fontspath + '/Roboto/roboto-black.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'robotobold';
-    src: url($fontspath + '/Roboto/roboto-bold.eot');
-    src: url($fontspath + '/Roboto/roboto-bold.eot?#iefix') format('embedded-opentype'),
-         url($fontspath + '/Roboto/roboto-bold.woff2') format('woff2'),
-         url($fontspath + '/Roboto/roboto-bold.woff') format('woff'),
-         url($fontspath + '/Roboto/roboto-bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'robotolight';
-    src: url($fontspath + '/Roboto/roboto-light.eot');
-    src: url($fontspath + '/Roboto/roboto-light.eot?#iefix') format('embedded-opentype'),
-         url($fontspath + '/Roboto/roboto-light.woff2') format('woff2'),
-         url($fontspath + '/Roboto/roboto-light.woff') format('woff'),
-         url($fontspath + '/Roboto/roboto-light.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'robotomedium';
-    src: url($fontspath + '/Roboto/roboto-medium.eot');
-    src: url($fontspath + '/Roboto/roboto-medium.eot?#iefix') format('embedded-opentype'),
-         url($fontspath + '/Roboto/roboto-medium.woff2') format('woff2'),
-         url($fontspath + '/Roboto/roboto-medium.woff') format('woff'),
-         url($fontspath + '/Roboto/roboto-medium.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'robotoregular';
-    src: url($fontspath + '/Roboto/roboto-regular.eot');
-    src: url($fontspath + '/Roboto/roboto-regular.eot?#iefix') format('embedded-opentype'),
-         url($fontspath + '/Roboto/roboto-regular.woff2') format('woff2'),
-         url($fontspath + '/Roboto/roboto-regular.woff') format('woff'),
-         url($fontspath + '/Roboto/roboto-regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'robotothin';
-    src: url($fontspath + '/Roboto/roboto-thin.eot');
-    src: url($fontspath + '/Roboto/roboto-thin.eot?#iefix') format('embedded-opentype'),
-         url($fontspath + '/Roboto/roboto-thin.woff2') format('woff2'),
-         url($fontspath + '/Roboto/roboto-thin.woff') format('woff'),
-         url($fontspath + '/Roboto/roboto-thin.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-/* eof fonts */
-
-
-/* ==========================================================================
-   mixins
-   ========================================================================== */
-@mixin link-text() {
-  text-decoration: none;
-  color: inherit;
-  &, &:visited, &:focus {
-    color: inherit;
-  }
-}
-@mixin panel() {
-  border-radius: 2px;
-  color: $dark;
-  background-color: $white;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
-}
-@mixin list-plain() {
-  margin: 0;
-  padding-left: 0;
-  list-style-type: none;
-}
-@mixin text-ellipsis() {
-  white-space: nowrap;
-      overflow: hidden;
-      -ms-text-overflow: ellipsis;
-          text-overflow: ellipsis;
-}
-
-/* eof mixins */
 
   /* ==========================================================================
      elements
@@ -175,7 +73,7 @@ svg {
       -ms-transition: color 400ms ease;
        -o-transition: color 400ms ease;
           transition: color 400ms ease;
-  
+
   &_fb:hover {
     color: #3d5a98;
   }
@@ -213,12 +111,12 @@ md-button.btn {
           box-sizing: border-box;
   &.disabled,
   &:disabled {
-    opacity: 0.3;    
+    opacity: 0.3;
     cursor: default !important;
   }
 
   &.btn {
-    
+
   }
 
   .svg-icon {
@@ -343,8 +241,8 @@ md-button.btn {
   margin: 0;
   padding: 0;
   font-size: 15px;
- 
-  label:not(.md-no-float):not(.md-container-ignore), 
+
+  label:not(.md-no-float):not(.md-container-ignore),
   .md-placeholder {
     font-family: $ffmd;
     padding-left: 16px;
@@ -354,8 +252,8 @@ md-button.btn {
          -o-transform: translate3d(0, 40px, 0) scale(1);
             transform: translate3d(0, 40px, 0) scale(1);
   }
-  &.md-input-focused label:not(.md-no-float), 
-  &.md-input-has-placeholder label:not(.md-no-float), 
+  &.md-input-focused label:not(.md-no-float),
+  &.md-input-has-placeholder label:not(.md-no-float),
   &.md-input-has-value label:not(.md-no-float) {
     -webkit-transform: translate3d(0, 22px, 0) scale(0.75);
        -moz-transform: translate3d(0, 22px, 0) scale(0.75);
@@ -388,176 +286,6 @@ md-button.btn {
 /* eof elements */
 
 /* ==========================================================================
-   animations
-   ========================================================================== */
-   
-.animated {
-  -webkit-animation-duration: 0.8s;
-  animation-duration: 0.8s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-.animated-long {
-  -webkit-animation-duration: 1.5s;
-  animation-duration: 1.5s;
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-@-webkit-keyframes slideInRight {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    -webkit-transform: translate3d(100%, 0, 0);
-    transform: translate3d(100%, 0, 0);
-    visibility: visible;
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.slideInRight {
-  -webkit-animation-name: slideInRight;
-  animation-name: slideInRight;
-}
-
-@-webkit-keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, -100%, 0);
-    transform: translate3d(0, -100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-.fadeInDown {
-  -webkit-animation-name: fadeInDown;
-  animation-name: fadeInDown;
-}
-
-@-webkit-keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-
-  to {
-    opacity: 1;
-    -webkit-transform: none;
-    transform: none;
-  }
-}
-
-.fadeInUp {
-  -webkit-animation-name: fadeInUp;
-  animation-name: fadeInUp;
-}
-
-@-webkit-keyframes fadeOutDown {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-@keyframes fadeOutDown {
-  from {
-    opacity: 1;
-  }
-
-  to {
-    opacity: 0;
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-  }
-}
-
-.fadeOutDown {
-  -webkit-animation-name: fadeOutDown;
-  animation-name: fadeOutDown;
-}
-
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fadeIn {
-  -webkit-animation-name: fadeIn;
-  animation-name: fadeIn;
-}
-/* eof animations */
-
-/* ==========================================================================
    main styles
    ========================================================================== */
 *:focus, *:active {
@@ -575,10 +303,10 @@ body {
       overflow-x: hidden;
   background: $bg;
   color: $black;
-}   
+}
 
 .content {
-  overflow: visible;  
+  overflow: visible;
   min-height: $contentmh;
 }
 
