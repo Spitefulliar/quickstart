@@ -12,10 +12,10 @@ Webpack.config is tuned for develop mode - faster builds withought source maps o
 
 ##  Scripts:
 
++   `npm run pull`: pull from master, install yarn packages, build in production mode
 +   `npm run build`: build in develop mode
 +   `npm run buildprod`: build in production mode
 +   `npm run watch`: buid with watcher on
-+   `npm run pull`: pull from master, yarn packages installation, build in production mode
 
 ## Entries ##
 
