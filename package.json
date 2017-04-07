@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git@github.com:Spitefulliar/quickstart.git"
   },
-  "author": "ArticulMedia",
+  "author": "Spitefulliar",
   "license": "ISC",
   "dependencies": {
     "angular": "=1.5.8",
