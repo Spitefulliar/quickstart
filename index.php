@@ -10,13 +10,13 @@
   <base href="/">
 
   <!-- CSS -->
-  <link rel="stylesheet" type="text/css" href="./dist/assets/vendor.css?<?php echo time()?>">
-  <link rel="stylesheet" type="text/css" href="./dist/assets/bundle.css?<?php echo time()?>">
+  <link rel="stylesheet" type="text/css" href="./local/templates/.default/assets/vendor.css?<?php echo time()?>">
+  <link rel="stylesheet" type="text/css" href="./local/templates/.default/assets/bundle.css?<?php echo time()?>">
   <!-- eof CSS -->
 
   <!-- js -->
-  <script rel="preload" src="./dist/assets/vendor.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
-  <script rel="preload" src="./dist/assets/bundle.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
+  <script rel="preload" src="./local/templates/.default/assets/vendor.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
+  <script rel="preload" src="./local/templates/.default/assets/bundle.js?<?php echo time()?>" type="text/javascript" charset="utf-8"></script>
   <!-- eof js -->
 </head>
 
