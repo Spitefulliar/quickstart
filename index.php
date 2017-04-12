@@ -21,6 +21,7 @@
 </head>
 
 <body>
-  <ui-view></ui-view>
+  <ui-view>
+  </ui-view>
 </body>
 </html>
